@@ -2,6 +2,7 @@ int motorPins[] = {8, 9, 10, 11};
 int count = 0;
 int count2 = 0;
 
+cancelValue = 200; //ovo mjenjaš
 unsigned int delayTime = 1500;
 String data="";
 
@@ -83,18 +84,18 @@ void updateEncoder(){
     else encoderValue+=10;
   }
   lastEncoded = encoded;
-  if(cancel==200) encoderValue=0;
+  if(cancel==cancelValue) encoderValue=0;
   cancel=0;
 }
 
 void loop() {
   while(encoderValue<0){
-    if(cancel < 200) cancel++;
+    if(cancel < cancelValue) cancel++;
     moveForward();
     encoderValue++;
   }
   while(encoderValue>0){
-    if(cancel < 200) cancel++;
+    if(cancel < cancelValue) cancel++;
     moveBackward();
     encoderValue--;
   }
